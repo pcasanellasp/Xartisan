@@ -25,6 +25,18 @@ async function show (req, res, next) {
   }
 }
 
+async function profile (req, res, next) {
+  try {
+    const user = await User.findOne({ username: req.user.username }).lean()
+    if (user) {
+      return res.status(200).json(user)
+    }
+    return res.status(400).json({ message: 'No User Found' })
+  } catch (error) {
+    next(error)
+  }
+}
+
 async function create (req, res, next) {
   // Create a new user
   try {
@@ -67,6 +79,7 @@ async function remove (req, res, next) {
 module.exports = {
   get,
   show,
+  profile,
   create,
   update,
   remove,
