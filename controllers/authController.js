@@ -23,7 +23,7 @@ async function login (req, res, next) {
     const token = await user.generateAuthToken()
     res.send({ user, token })
   } catch (error) {
-    res.status(400).send(error)
+    next(error)
   }
 }
 
@@ -36,7 +36,7 @@ async function logout (req, res, next) {
     await req.user.save()
     res.send()
   } catch (error) {
-    res.status(500).send(error)
+    next(error)
   }
 }
 
@@ -47,7 +47,7 @@ async function logoutAll (req, res, next) {
     await req.user.save()
     res.send()
   } catch (error) {
-    res.status(500).send(error)
+    next(error)
   }
 }
 

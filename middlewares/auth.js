@@ -10,7 +10,8 @@ function allow (roles = 'guest') {
 
   return async function (req, res, next) {
     try {
-      const userRoles = ['admin']
+      const userRoles = req.user.roles
+
       if (userRoles.includes('admin')) {
         return next()
       }
@@ -33,7 +34,7 @@ function deny (roles = 'guest') {
 
   return async function (req, res, next) {
     try {
-      const userRoles = ['admin']
+      const userRoles = req.user.roles
 
       for (const role of roleList) {
         if (userRoles.includes(role)) {
@@ -49,9 +50,9 @@ function deny (roles = 'guest') {
 }
 
 const auth = async (req, res, next) => {
-  const token = req.header('Authorization').replace('Bearer ', '')
-  const data = jwt.verify(token, process.env.JWT_KEY)
   try {
+    const token = req.header('Authorization').replace('Bearer ', '')
+    const data = jwt.verify(token, process.env.JWT_KEY)
     const user = await User.findOne({ _id: data._id, 'tokens.token': token })
     if (!user) {
       throw new Error()
