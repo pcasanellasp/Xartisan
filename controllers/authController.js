@@ -27,6 +27,18 @@ async function login (req, res, next) {
   }
 }
 
+async function register (req, res, next) {
+  // Register a new user
+  try {
+    const user = new User(req.body)
+    await user.save()
+    const token = await user.generateAuthToken()
+    res.status(201).json({ user, token })
+  } catch (error) {
+    next(error)
+  }
+}
+
 async function logout (req, res, next) {
   // Log user out of the application
   try {
@@ -54,6 +66,7 @@ async function logoutAll (req, res, next) {
 module.exports = {
   get,
   login,
+  register,
   logout,
   logoutAll,
 }
