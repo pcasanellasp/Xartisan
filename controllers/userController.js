@@ -27,7 +27,7 @@ async function show (req, res, next) {
 
 async function profile (req, res, next) {
   try {
-    const user = await User.findOne({ username: req.user.username }).lean()
+    const user = await User.findOne({ email: req.user.email }).lean()
     if (user) {
       return res.status(200).json(user)
     }
