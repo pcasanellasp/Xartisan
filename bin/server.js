@@ -10,5 +10,5 @@ app.set('port', port)
 
 app.listen(port, () => console.info('\x1b[34m%s\x1b[0m', `
   REST      → http://localhost:${port}/
-  `
+  `,
 ))
