@@ -1,5 +1,5 @@
 // ------------------------------
-// User Model
+// Option Model
 // ------------------------------
 
 const mongoose = require('mongoose')
@@ -21,6 +21,10 @@ const OptionSchema = new Schema({
     type: [String],
     enum: ['all', 'auth', 'admin', 'none'],
     required: true,
+    default: 'none',
+  },
+  category: {
+    type: [String],
     default: 'none',
   },
 },

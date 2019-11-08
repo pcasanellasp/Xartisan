@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
+const mailerRouter = require('./routes/mailerRoute')
 const optionRouter = require('./routes/optionRoute')
 const authRouter = require('./routes/authRoute')
 const userRouter = require('./routes/userRoute')
@@ -47,6 +48,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // API Routes.
+app.use('/mailer', mailerRouter)
 app.use('/options', optionRouter)
 app.use('/auth', authRouter)
 app.use('/users', userRouter)
