@@ -15,7 +15,6 @@ async function get (req, res, next) {
 
 async function show (req, res, next) {
   try {
-    console.info(req.params)
     const option = await Option.findOne({ option_key: req.params.id }).lean()
     if (option) {
       return res.status(200).json(option)
