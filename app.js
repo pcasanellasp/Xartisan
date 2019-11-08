@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
+const optionRouter = require('./routes/optionRoute')
 const authRouter = require('./routes/authRoute')
 const userRouter = require('./routes/userRoute')
 const welcomeRouter = require('./routes/welcomeRoute')
@@ -46,6 +47,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // API Routes.
+app.use('/options', optionRouter)
 app.use('/auth', authRouter)
 app.use('/users', userRouter)
 app.use('/', welcomeRouter)
