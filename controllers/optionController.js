@@ -6,7 +6,17 @@ const Option = require('../models/Option')
 
 async function get (req, res, next) {
   try {
-    const options = await Option.find({}).lean()
+    let params = {}
+    if (req.query.category) {
+      params = {
+        'category': { $in: [
+          req.query.category,
+        ],
+        },
+      }
+    }
+
+    const options = await Option.find(params).lean()
     return res.status(200).json(options)
   } catch (error) {
     next(error)
