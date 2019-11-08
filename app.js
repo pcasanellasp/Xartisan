@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Routes
 const authRouter = require('./routes/authRoute')
+const userRouter = require('./routes/userRoute')
 const welcomeRouter = require('./routes/welcomeRoute')
 
 // Allow CORS.
@@ -46,6 +47,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // API Routes.
 app.use('/auth', authRouter)
+app.use('/users', userRouter)
 app.use('/', welcomeRouter)
 
 // Capture 404 errors
